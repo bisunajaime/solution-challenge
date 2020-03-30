@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:helpinghand/constants/constants.dart';
 import 'package:helpinghand/models/reliefcenter_model.dart';
+import 'package:helpinghand/pages/maps_page.dart';
 import 'package:helpinghand/utils/data_utils.dart';
 import 'package:helpinghand/widgets/loading_widget.dart';
 import 'package:helpinghand/widgets/stepper_widget.dart';
@@ -23,6 +25,27 @@ class HomePage extends StatelessWidget {
                 fontSize: 20.0,
                 color: Colors.white,
               ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        backgroundColor: Color(0xff6c63ff),
+        label: Text(
+          'Find Centers',
+          style: TextStyle(
+            fontFamily: mBold,
+            color: Colors.white,
+            fontSize: 12,
+          ),
+        ),
+        icon: Icon(Icons.map),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MapsPage(),
+          ),
         ),
       ),
       body: StreamBuilder(

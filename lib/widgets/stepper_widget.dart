@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:helpinghand/constants/constants.dart';
+import 'package:helpinghand/main.dart';
+import 'package:helpinghand/models/reliefcenter_model.dart';
 import 'package:helpinghand/pages/maps_page.dart';
+import 'package:helpinghand/pages/moreinfo_page.dart';
 import 'package:helpinghand/utils/data_utils.dart';
+import 'package:helpinghand/widgets/reliefcenterlist_widget.dart';
+import 'package:helpinghand/widgets/stepscontainer_widget.dart';
 import 'package:provider/provider.dart';
 
 class StepperWidget extends StatelessWidget {
@@ -15,88 +20,71 @@ class StepperWidget extends StatelessWidget {
           image: AssetImage('assets/images/home-bg.png'),
         ),
       ),
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Stepper(
-            physics: BouncingScrollPhysics(),
-            currentStep: 0,
-            steps: [
-              Step(
-                title: Text(
-                  'Step 1',
-                  style: Theme.of(context).textTheme.title,
-                ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Text(
+              'Instructions',
+              style: TextStyle(
+                fontFamily: mBlack,
+                fontSize: 25.0,
               ),
-              Step(
-                title: Text(
-                  'Step 2',
-                  style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Container(
+            height: 150,
+            width: double.infinity,
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                StepsContainerWidget(
+                  stepTitle: 'Step 1',
+                  stepContent: 'Content',
                 ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
-              ),
-              Step(
-                title: Text(
-                  'Step 3',
-                  style: Theme.of(context).textTheme.title,
+                StepsContainerWidget(
+                  stepTitle: 'Step 2',
+                  stepContent: 'Content',
                 ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
-              ),
-              Step(
-                title: Text(
-                  'Step 4',
-                  style: Theme.of(context).textTheme.title,
+                StepsContainerWidget(
+                  stepTitle: 'Step 3',
+                  stepContent: 'Content',
                 ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
-              ),
-              Step(
-                title: Text(
-                  'Step 5',
-                  style: Theme.of(context).textTheme.title,
+                StepsContainerWidget(
+                  stepTitle: 'Step 4',
+                  stepContent: 'Content',
                 ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
-              ),
-              Step(
-                title: Text(
-                  'Step 6',
-                  style: Theme.of(context).textTheme.title,
+                StepsContainerWidget(
+                  stepTitle: 'Step 5',
+                  stepContent: 'Content',
                 ),
-                subtitle: Text('Instructions'),
-                content: Text('The Content'),
-                isActive: true,
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Text(
+              'Relief Centers',
+              style: TextStyle(
+                fontFamily: mBlack,
+                fontSize: 25.0,
               ),
-              color: Color(0xff6c63ff),
-              child: Text(
-                'Find Centers',
-                style: TextStyle(
-                  fontFamily: mBold,
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MapsPage(),
-                ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, i) {
+                  ReliefCenterModel model = provider.reliefCenterModelList[i];
+
+                  return ReliefCenterListWidget(
+                    model: model,
+                  );
+                },
+                itemCount: provider.reliefCenterModelList.length,
               ),
             ),
           )
