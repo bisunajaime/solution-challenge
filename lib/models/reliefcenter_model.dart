@@ -24,7 +24,7 @@ class ReliefCenterModel {
   final String availabilityStartTime;
   final String availabilityEndTime;
   // accepted goods
-  final Map<String, dynamic> acceptedGoods;
+  final List<dynamic> acceptedGoods;
 
   ReliefCenterModel({
     this.id,

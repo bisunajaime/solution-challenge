@@ -581,7 +581,7 @@ class _MoreInfoPageState extends State<MoreInfoPage> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10.0, vertical: 5.0),
                               child: Text(
-                                '${model.acceptedGoods[i]}',
+                                '${model.acceptedGoods[i].keys.toString().replaceAll('(', '').replaceAll(')', '')}',
                                 style: subMed,
                               ),
                             ),
